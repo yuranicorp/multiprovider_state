@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multi_provider/core/viewmodels/cart/cart_provider.dart';
 import 'package:multi_provider/core/viewmodels/money/money_provider.dart';
+import 'package:multi_provider/ui/router/router_generator.dart';
 import 'package:multi_provider/ui/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: "Multi Provider",
-        home: HomeScreen(),
+        initialRoute: RouterGenerator.routeHome,
+        onGenerateRoute: RouterGenerator.generate,
       ),
     );
   }
