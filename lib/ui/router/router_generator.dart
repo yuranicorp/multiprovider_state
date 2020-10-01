@@ -9,9 +9,7 @@ class RouterGenerator {
   static const routeHome = "/home";
     
   static Route<dynamic> generate(RouteSettings settings) {
-    /// Argument list
-    final args = settings.arguments;
-
+    
     switch(settings.name) {
       case routeHome:
         return MaterialPageRoute(builder: (_) => HomeScreen());
