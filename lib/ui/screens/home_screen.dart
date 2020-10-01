@@ -4,22 +4,7 @@ import 'package:multi_provider/core/viewmodels/money/money_provider.dart';
 import 'package:provider/provider.dart';
 
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-
-  void onClickAdd() {
-    final moneyProv = Provider.of<MoneyProvider>(context, listen: false);
-    final cartProv = Provider.of<CartProvider>(context, listen: false);
-
-    if (moneyProv.balance >= cartProv.applePrice) {
-      cartProv.addQuantity(1);
-      moneyProv.decreaseBalance(cartProv.applePrice);
-    }
-  }
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,10 +18,20 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _floatingButton() {
-    return FloatingActionButton(
-      onPressed: () => onClickAdd(),
-      child: Icon(Icons.add_shopping_cart),
-      backgroundColor: Colors.purple,
+    return Consumer2<MoneyProvider, CartProvider>(
+      builder: (context, money, cart, _) {
+
+        return FloatingActionButton(
+          onPressed: () {
+            if (money.balance >= cart.applePrice) {
+              cart.addQuantity(1);
+              money.decreaseBalance(cart.applePrice);
+            }
+          },
+          child: Icon(Icons.add_shopping_cart),
+          backgroundColor: Colors.purple,
+        );
+      }
     );
   }
 }

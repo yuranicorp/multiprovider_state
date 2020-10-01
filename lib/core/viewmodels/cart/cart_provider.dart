@@ -6,7 +6,6 @@ class CartProvider with ChangeNotifier {
 
   int applePrice = 500;
 
-  /// Adding quantity to cart
   void addQuantity(int value) {
     _quantity += value;
     notifyListeners();
