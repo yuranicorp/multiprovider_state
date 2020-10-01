@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:multi_provider/core/viewmodels/cart.dart';
-import 'package:multi_provider/core/viewmodels/money.dart';
+import 'package:multi_provider/core/viewmodels/cart/cart_provider.dart';
+import 'package:multi_provider/core/viewmodels/money/money_provider.dart';
 import 'package:provider/provider.dart';
 
 
@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _floatingButton() {
-    return Consumer2<Money, Cart>(
+    return Consumer2<MoneyProvider, CartProvider>(
       builder: (context, money, cart, _) {
 
         return FloatingActionButton(
@@ -58,7 +58,7 @@ class HomeBody extends StatelessWidget {
         Container(
           child: Align(
             alignment: Alignment.centerRight,
-            child: Consumer<Money>(
+            child: Consumer<MoneyProvider>(
               builder: (context, money, _) => Text(
                 money.balance.toString(),
                 style: TextStyle(
@@ -89,7 +89,7 @@ class HomeBody extends StatelessWidget {
     return Container(
       child: Align(
         alignment: Alignment.centerRight,
-        child: Consumer<Cart>(
+        child: Consumer<CartProvider>(
           builder: (context, cart, _) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[

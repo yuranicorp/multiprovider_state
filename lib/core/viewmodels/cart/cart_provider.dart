@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Cart with ChangeNotifier {
+class CartProvider with ChangeNotifier {
   int _quantity = 0;
   int get quantity => _quantity;
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Money with ChangeNotifier {
+class MoneyProvider with ChangeNotifier {
   int _balance = 5000;
   int get balance => _balance;
 

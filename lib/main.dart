@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:multi_provider/core/viewmodels/cart.dart';
-import 'package:multi_provider/core/viewmodels/money.dart';
+import 'package:multi_provider/core/viewmodels/cart/cart_provider.dart';
+import 'package:multi_provider/core/viewmodels/money/money_provider.dart';
 import 'package:multi_provider/ui/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -14,10 +14,10 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => Money(),
+          create: (context) => MoneyProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => Cart(),
+          create: (context) => CartProvider(),
         )
       ],
       child: MaterialApp(
