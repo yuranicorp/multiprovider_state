@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:multi_provider/core/viewmodels/cart.dart';
-import 'package:multi_provider/core/viewmodels/money.dart';
+import 'package:multi_provider/core/viewmodels/cart/cart_provider.dart';
+import 'package:multi_provider/core/viewmodels/money/money_provider.dart';
 import 'package:provider/provider.dart';
 
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  void onClickAdd() {
+    final moneyProv = Provider.of<MoneyProvider>(context, listen: false);
+    final cartProv = Provider.of<CartProvider>(context, listen: false);
+
+    if (moneyProv.balance >= cartProv.applePrice) {
+      cartProv.addQuantity(1);
+      moneyProv.decreaseBalance(cartProv.applePrice);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,20 +33,10 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _floatingButton() {
-    return Consumer2<Money, Cart>(
-      builder: (context, money, cart, _) {
-
-        return FloatingActionButton(
-          onPressed: () {
-            if (money.balance >= cart.applePrice) {
-              cart.addQuantity(1);
-              money.decreaseBalance(cart.applePrice);
-            }
-          },
-          child: Icon(Icons.add_shopping_cart),
-          backgroundColor: Colors.purple,
-        );
-      }
+    return FloatingActionButton(
+      onPressed: () => onClickAdd(),
+      child: Icon(Icons.add_shopping_cart),
+      backgroundColor: Colors.purple,
     );
   }
 }
@@ -58,7 +63,7 @@ class HomeBody extends StatelessWidget {
         Container(
           child: Align(
             alignment: Alignment.centerRight,
-            child: Consumer<Money>(
+            child: Consumer<MoneyProvider>(
               builder: (context, money, _) => Text(
                 money.balance.toString(),
                 style: TextStyle(
@@ -89,7 +94,7 @@ class HomeBody extends StatelessWidget {
     return Container(
       child: Align(
         alignment: Alignment.centerRight,
-        child: Consumer<Cart>(
+        child: Consumer<CartProvider>(
           builder: (context, cart, _) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
