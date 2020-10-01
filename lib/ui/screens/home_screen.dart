@@ -59,7 +59,14 @@ class HomeBody extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text("Balance"),
+        Text(
+          "Balance",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
         Container(
           child: Align(
             alignment: Alignment.centerRight,
